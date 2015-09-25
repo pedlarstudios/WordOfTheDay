@@ -1,0 +1,4 @@
+<layout id="MainLayout">
+    <label id="wordLabel" text="" color="Gfx.COLOR_WHITE" x="25" y="20" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="noteLabel" text="" color="Gfx.COLOR_WHITE" x="25" y="140" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+</layout>

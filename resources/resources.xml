@@ -1,0 +1,7 @@
+<resources>
+    <string id="AppName">WordOfTheDay</string>
+
+    <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
+    <bitmap id="id_monkey" filename="images/monkey.png" />
+    <string id="apiKey">INSERT KEY HERE</string>
+</resources>
