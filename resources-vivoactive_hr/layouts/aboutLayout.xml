@@ -1,0 +1,6 @@
+<layout id="AboutLayout">
+    <label id="aboutLabel" text="@Strings.aboutMenuLabel" color="Gfx.COLOR_GREEN" x="center" y="5" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="appVersionLabel" text="@Strings.version" color="Gfx.COLOR_WHITE" x="center" y="35" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" />    
+    <bitmap id="providerLogo" x="center" y="60" filename="../images/wordnik_badge_a2.png" />    
+    <label id="developerLabel" text="App developed by\r\nPedlar Studios\r\nhttp://www.pedlarstudios.com" color="Gfx.COLOR_WHITE" x="center" y="100" font="Gfx.FONT_SMALL" justification="Gfx.TEXT_JUSTIFY_CENTER" />    
+</layout>

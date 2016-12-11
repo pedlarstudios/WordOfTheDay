@@ -1,0 +1,4 @@
+<menu id="WordMenu">
+    <menu-item id="help">@Strings.helpMenuLabel</menu-item>    
+    <menu-item id="about">@Strings.aboutMenuLabel</menu-item>
+</menu>
