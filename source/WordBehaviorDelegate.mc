@@ -17,11 +17,16 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	function onKey(evt) {
 		logger.debug("Key press: " + evt.getKey());
 		if (Ui.KEY_ENTER == evt.getKey()) {	
+			logger.debug("Enter pressed");
 			self.wordView.nextDefinition();			
 		} else if (Ui.KEY_ESC == evt.getKey()) {
+			logger.debug("Escape pressed");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (Ui.KEY_UP == evt.getKey() || Ui.KEY_MENU == evt.getKey()) {
 			menuPress();
+		} else if (Ui.KEY_LAP == evt.getKey() || Ui.KEY_MODE == evt.getKey()) {
+			logger.debug("Lap/mode pressed");
+			openWordWebpage();
 		}
 
 		return true;
@@ -40,6 +45,7 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	} 
 	
 	hidden function menuPress() {
+		logger.debug("Menu pressed");
 		Ui.pushView(new Rez.Menus.WordMenu(), new WordMenuDelegate(), Ui.SLIDE_UP);
         return true;
 	}
@@ -67,30 +73,28 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	
 	function onHold(evt) {
 		logger.info("On hold");
-		if (Sys.getDeviceSettings().phoneConnected) {
-			self.wordView.openWordOfTheDayWebpage();
-		}
+		openWordWebpage();
 	}
 	
 	function onKeyReleased(evt) {
 		logger.info("On release " + evt.getKey());
-		if (Ui.KEY_ENTER == evt.getKey()) {
-			if (Sys.getDeviceSettings().phoneConnected) {
-				self.wordView.openWordOfTheDayWebpage();
-			}		
-		}	
+		return true;
 	}
 	
 	function onNextPage() {
 		logger.info("On next page");
-		//wordView.nextDefinition();
 		return true;
 	}
 	
 	function onPreviousPage() {
 		logger.info("On previous page");
-		//wordView.previousDefinition();
 		return true;		
+	}
+	
+	hidden function openWordWebpage() {
+		if (Sys.getDeviceSettings().phoneConnected) {
+			self.wordView.openWordOfTheDayWebpage();
+		}
 	}
 }
 

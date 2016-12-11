@@ -1,0 +1,7 @@
+<layout id="MainLayout">
+    <label id="wordLabel" text="" color="Gfx.COLOR_GREEN" x="center" y="20" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="currentDefinitionLabel" text="" color="Gfx.COLOR_WHITE" x="22" y="50" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_LEFT" />
+    <label id="loadingLabel" text="" color="Gfx.COLOR_WHITE" x="center" y="center" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />    
+    <label id="noteLabel" text="" color="Gfx.COLOR_WHITE" x="25" y="100" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="definitionNumberLabel" text="" color="Gfx.COLOR_WHITE" x="center" y="120" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+</layout>

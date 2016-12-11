@@ -36,7 +36,7 @@ class TextWrapper {
 				if (shouldAddHyphen(inputAsChars[end - 1])) {
 					output += "-";
 				}
-				output += "\r\n";
+				output += "\n";
 			}
 		}
 		return output;
