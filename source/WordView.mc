@@ -72,7 +72,6 @@ class WordView extends Ui.View {
     }
     
     function loadWordOfTheDay() {
-		// Check cache. Dictionary of info by date?
 		if (self.currentWord != null) {
 			return;
 		}
@@ -82,7 +81,7 @@ class WordView extends Ui.View {
 	
 	function nextDefinition() {
 		if (self.currentDefinitionIndex == -1 || self.currentWord == null || self.currentWord.definitions.size() <= 1) {
-    		return;
+    		return self.currentDefinitionIndex;
     	}
     	if (self.currentDefinitionIndex == self.currentWord.definitions.size() - 1) {
     		self.currentDefinitionIndex = 0;
@@ -96,7 +95,7 @@ class WordView extends Ui.View {
 	
 	function previousDefinition() {
 		if (self.currentDefinitionIndex == -1 || self.currentWord == null || self.currentWord.definitions.size() <= 1) {
-    		return;
+    		return self.currentDefinitionIndex;
     	}
     	if (self.currentDefinitionIndex == 0) {
     		self.currentDefinitionIndex = self.currentWord.definitions.size() - 1;

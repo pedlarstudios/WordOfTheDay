@@ -21,9 +21,10 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 			self.wordView.nextDefinition();			
 		} else if (Ui.KEY_ESC == evt.getKey()) {
 			logger.debug("Escape pressed");
-			Ui.popView(Ui.SLIDE_IMMEDIATE);
+			// Returning false exits the widget
+			return false;
 		} else if (Ui.KEY_UP == evt.getKey() || Ui.KEY_MENU == evt.getKey()) {
-			menuPress();
+			return menuPress();
 		} else if (Ui.KEY_LAP == evt.getKey() || Ui.KEY_MODE == evt.getKey()) {
 			logger.debug("Lap/mode pressed");
 			openWordWebpage();
@@ -39,9 +40,8 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	
 	function onBack() {
 		logger.debug("On back");
-		// Exit widget
-		Ui.popView(Ui.SLIDE_IMMEDIATE);
-		return true;
+		// Returning false exits the widget
+		return false;
 	} 
 	
 	hidden function menuPress() {
@@ -113,6 +113,7 @@ class WordMenuDelegate extends Ui.MenuInputDelegate {
 		} else if (item == :help) {
 			Ui.pushView(new HelpView(), new BaseBehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
 		}
+		return true;
 	}
 }
 
@@ -143,7 +144,7 @@ class AboutMenuBehaviorDelegate extends BaseBehaviorDelegate {
 		var y = coords[1];
 		
 		if (!Sys.getDeviceSettings().phoneConnected) {
-			return;
+			return true;
 		}
 		
 		var providerLabel = aboutView.findDrawableById("providerLogo");						
