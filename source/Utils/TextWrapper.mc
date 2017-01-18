@@ -16,28 +16,40 @@ class TextWrapper {
 		} else {
 			self.maxNumberOfLines = configuration.get(:maxNumberOfLines);
 			self.maxCharactersPerLine = configuration.get(:maxCharactersPerLine);
-						
-		}		
+		}
 	}
 	
-	function apply(input) {
+	function apply(input, numberOfDefinitions) {
 		var output = "";
 		var numberOfLines = Math.ceil(input.length().toDouble() / maxCharactersPerLine.toDouble()).toNumber();
+		numberOfLines = Utils.min(numberOfLines, self.maxNumberOfLines);
+		if (numberOfDefinitions > 1) {
+			numberOfLines--;
+		}
 		logger.debug("Input (" + input.length() + "): " + input);
-		logger.debug("Number of lines: " + numberOfLines);
+		logger.debug("Number of lines based on input: " + numberOfLines);
+		logger.debug("Number of lines possible based on device: " + self.maxNumberOfLines);
 		var inputAsChars = input.toCharArray();
 		for (var i = 0; i < numberOfLines; i++) {
 			var start = i * maxCharactersPerLine;
 			var end = Utils.min(start + maxCharactersPerLine, input.length());
 			var section = input.substring(start, end); 
-			logger.debug(section);
-			output += section;
-			if (i != numberOfLines - 1) {				
+			
+			if (i != numberOfLines - 1) {
+				output += section;				
 				if (shouldAddHyphen(inputAsChars[end - 1])) {
 					output += "-";
 				}
 				output += "\n";
+			} else {
+				// Last line, truncate if necessary
+				logger.debug("Length " + section.length());
+				if (section.length() >= maxCharactersPerLine - 3) {
+					section = section.substring(0, maxCharactersPerLine - 3) + "...";
+				}
+				output += section;
 			}
+			logger.debug(section);
 		}
 		return output;
 	}

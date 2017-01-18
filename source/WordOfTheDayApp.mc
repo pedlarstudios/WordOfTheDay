@@ -13,7 +13,7 @@ class WordOfTheDayApp extends App.AppBase {
     	// SET APPROPRIATELY BEFORE DEPLOYMENT/RELEASE
 		var config = new Log4MonkeyC.Config();
 		config.setLogLevel(Log.DEBUG);
-		Log4MonkeyC.setLogConfig(config);		
+		Log4MonkeyC.setLogConfig(config);
     }
 
     //! onStop() is called when your application is exiting

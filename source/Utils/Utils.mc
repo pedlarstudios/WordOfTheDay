@@ -12,6 +12,13 @@ module Utils {
 		return b;
 	}
 	
+	function max(a, b) {
+		if (a > b) {
+			return a;
+		}
+		return b;
+	}
+	
 	function formattedDateKey(date, separator) {
 		var timeInfo = Cal.info(date, Time.FORMAT_SHORT);
 		return timeInfo.year.format("%04d") + separator + timeInfo.month.format("%02d") + separator + timeInfo.day.format("%02d");

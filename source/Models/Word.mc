@@ -45,24 +45,7 @@ class Word {
 		var serializedExamples = serialized.get("examples");
 		for (var i = 0; i < serializedExamples.size(); i++) {
 			examples.add(new WordExample(serializedExamples[i]));
-		}
-		
-		/*if (serialized.get(definitions) != null) {
-			var serializedDefs = serialized.get(:definitions)[:array];
-			//var serializedDefsArray = serializedDefs[:array];
-			for (var i = 0; i < serializedDefs.size(); i++) {
-				definitions.add(new WordDefinition(serializedDefs[i]));
-			}
-		}
-		
-		examples = new SerializableArray(new [0]);
-		if (serialized.get(:examples)) {
-			var serializedExamples = serialized.get(:examples)[:array];
-			//var serializedDefsArray = serializedDefs[:array];
-			for (var i = 0; i < serializedExamples.size(); i++) {
-				examples.add(new WordDefinition(serializedExamples[i]));
-			}
-		}*/
+		}		
 	}
 	
 	function toString() {
@@ -137,107 +120,8 @@ class WordBuilderFromJson {
 
 	function build(jsonData) {
 		var word = new Word(jsonData);
-		/*word.id = jsonData["id"];
-		word.word = jsonData["word"];
-		word.note = jsonData["note"];*/
-		
-		/*var examplesRaw = jsonData["examples"];
-		if (examplesRaw != null) { 
-			for (var i = 0; i < examplesRaw.size(); i++) {
-				var exampleRaw = examplesRaw[i];
-				var example = new WordExample(exampleRaw);
-							
-				word.examples.add(example);
-			}
-		}
-		var definitionsRaw = jsonData["definitions"];
-		if (definitionsRaw != null) {
-			for (var i = 0; i < definitionsRaw.size(); i++) {
-				var definitionRaw = definitionsRaw[i];
-				var definition = new WordDefinition(definitionRaw);
-			
-				word.definitions.add(definition);
-			}
-		}*/
 		
 		logger.debug("Built word from JSON: " + word.toString());
 		return word;	
-	}
-}
-
-//! Array with serialization functionality
-class SerializableArray extends Lang.Array {
-	hidden var backingArr;
-
-	function initialize(array) {	
-		Lang.Array.initialize();		
-		backingArr = array;
-	}
-	
-	function indexOf(object) {
-		return backingArr.indexOf(object);
-	}
-	
-	function add(object) {
-		backingArr.add(object);
-		return self;		
-	}
-	
-	function addAll(array) {
-		backingArr.addAll(array);
-		return self;
-	}
-	
-	function remove(object) {
-		return backingArr.remove(object);
-	}
-	
-	function removeAll(object) {
-		return backingArr.removeAll(object);
-	}
-	
-	function reverse() {
-		var backingArrayReversed = backingArr.reverse();
-		return new SerializableArray(backingArrayReversed);
-	}
-	
-	function size() {
-		return backingArr.size();
-	}
-	
-	function slice(startIndex, endIndex) {
-		var backingArraySliced = backingArr.slice(startIndex, endIndex);
-		return new SerializableArray(backingArraySliced);
-	}
-	
-	function toString() {
-		return self.serializationName + " " + backingArr.toString();
-	}
-	
-	function serialize() {
-		var serializedArray = new [0];
-		for (var i = 0; i < backingArr.size(); i++) {
-			var item = backingArr[i];
-			serializedArray.add(item.serialize());
-		}	
-		
-		return serializedArray;
-		/*return {
-			//:count => backingArr.size(),
-			:array => serializedArray
-		};*/
-	}
-	
-	function deserialize(serialized) {
-		//var count = serialized[:count];
-		backingArr = serialized[:array];
-	}
-	
-	function get(index) {
-		return backingArr[index];
-	}
-	
-	function set(index, value) {
-		backingArr[index] = value;
 	}
 }

@@ -1,6 +1,7 @@
 <layout id="MainLayout">
     <label id="wordLabel" text="" color="Gfx.COLOR_GREEN" x="5" y="5" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_LEFT" />
     <label id="currentDefinitionLabel" text="" color="Gfx.COLOR_WHITE" x="5" y="30" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_LEFT" />
+    <bitmap id="loadingImage" x="center" y="35" filename="../images/logo_32x32.png" />
     <label id="loadingLabel" text="" color="Gfx.COLOR_WHITE" x="center" y="center" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />    
     <label id="noteLabel" text="" color="Gfx.COLOR_WHITE" x="25" y="100" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
     <label id="definitionNumberLabel" text="" color="Gfx.COLOR_WHITE" x="center" y="120" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />

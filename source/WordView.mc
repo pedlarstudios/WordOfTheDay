@@ -16,6 +16,9 @@ class WordView extends Ui.View {
 	hidden var dataLoader;
 	hidden var currentWord;
 	hidden var currentDefinitionIndex;
+	hidden var loadingLabelDrawable;
+	hidden var loadingImageDrawable;
+	hidden var loadingImageOriginalLocation = [];
 
 	function initialize() {
 		Ui.View.initialize();
@@ -26,16 +29,21 @@ class WordView extends Ui.View {
     //! Load your resources here
     function onLayout(dc) {
         setLayout(Rez.Layouts.MainLayout(dc));
+        loadingLabelDrawable = findDrawableById("loadingLabel");
+        loadingImageDrawable = findDrawableById("loadingImage");
+        loadingImageOriginalLocation = [loadingImageDrawable.locX, loadingImageDrawable.locY];
     }
 
     //! Restore the state of the app and prepare the view to be shown
     function onShow() {
+    	setIsLoading();
     	var lastLoadedDate = App.getApp().getProperty(LAST_LOADED_DATE_KEY);
     	var currentDate = Utils.formattedDateKey(Time.now(), "-");
     	logger.debug("Last loaded: " + lastLoadedDate + " Current: " + currentDate);    		
     	if (!currentDate.equals(lastLoadedDate)) {
 			loadWordOfTheDay();
 		} else {
+			setFinishedLoading();
 			logger.debug("Displaying previously loaded word");
 			currentWord = new Word(App.getApp().getProperty(LAST_LOADED_WORD_KEY));
 			drawWord(currentWord);
@@ -62,7 +70,7 @@ class WordView extends Ui.View {
     		App.getApp().setProperty(LAST_LOADED_WORD_KEY, currentWord.serialize());
     		drawWord(currentWord);
     	} else {    		
-    		findDrawableById("loadingLabel").setText(data.data);
+    		setLoadingError();
     		Ui.requestUpdate();
     	}
     }
@@ -108,11 +116,18 @@ class WordView extends Ui.View {
 	}
 	
 	hidden function setIsLoading() {
-		findDrawableById("loadingLabel").setText("Loading...");
+		loadingLabelDrawable.setText(Rez.Strings.loadingText);
+		loadingImageDrawable.setLocation(loadingImageOriginalLocation[0], loadingImageOriginalLocation[1]);
 	}
 	
 	hidden function setFinishedLoading() {
-		findDrawableById("loadingLabel").setText("");
+		loadingLabelDrawable.setText("");
+		loadingImageDrawable.setLocation(-999, -999);
+	}
+	
+	hidden function setLoadingError(responseData) {
+		loadingLabelDrawable.setText(responseData.data);
+		loadingImageDrawable.setLocation(loadingImageOriginalLocation[0], loadingImageOriginalLocation[1]);    	
 	}
 	
 	hidden function loader() {		
@@ -137,11 +152,11 @@ class WordView extends Ui.View {
     	var definition = word.definitions[self.currentDefinitionIndex];
     	if (word.definitions.size() == 1) {
     		var wordText = definition.partOfSpeech + ": " + definition.text;
-	    	definitionLabel.setText(wrapper.apply(wordText));
+	    	definitionLabel.setText(wrapper.apply(wordText, word.definitions.size()));
     		definitionNumberLabel.setText("");
     	} else if (word.definitions.size() > 0) {
     		var wordText = (self.currentDefinitionIndex + 1) + ") " + definition.partOfSpeech + ": " + definition.text;
-	    	definitionLabel.setText(wrapper.apply(wordText));
+	    	definitionLabel.setText(wrapper.apply(wordText, word.definitions.size()));
     		definitionNumberLabel.setText((self.currentDefinitionIndex + 1) + "/" + word.definitions.size());
     	} else {
     		definitionLabel.setText("");

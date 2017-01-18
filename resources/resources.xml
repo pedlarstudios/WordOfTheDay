@@ -4,8 +4,10 @@
     <bitmap id="providerLogo" filename="images/wordnik_badge_a2.png" />
     <string id="aboutMenuLabel">About</string>
     <string id="helpMenuLabel">Help</string>
-    <string id="apiKey">INSERT KEY HERE</string>
+    <string id="apiKey">INSERT KEY HERE</string>    
     <string id="providerUrl">https://www.wordnik.com</string>
     <string id="developerUrl"></string>
     <string id="version">Version 1.00</string>
+    <string id="loadingText">Loading...</string>
+    <string id="emptyString"></string>
 </resources>
