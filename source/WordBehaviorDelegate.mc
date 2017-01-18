@@ -148,13 +148,16 @@ class AboutMenuBehaviorDelegate extends BaseBehaviorDelegate {
 		}
 		
 		var providerLabel = aboutView.findDrawableById("providerLogo");						
+		var developerLabel = aboutView.findDrawableById("developerLabel");
 		
 		// Provider tapped
 		if ((x >= applyMinusBuffer(providerLabel.locX) && x <= applyPlusBuffer(providerLabel.locX) + providerLabel.width)
 			&& (y >= applyMinusBuffer(providerLabel.locY) && y <= applyPlusBuffer(providerLabel.locY) + providerLabel.height)) {
 			Comm.openWebPage(Ui.loadResource(Rez.Strings.providerUrl), {}, {});
-		}	
-		// TODO handle developer tap when implemented
+		} else if ((x >= applyMinusBuffer(developerLabel.locX) && x <= applyPlusBuffer(developerLabel.locX) + developerLabel.width)
+			&& (y >= applyMinusBuffer(developerLabel.locY) && y <= applyPlusBuffer(developerLabel.locY) + developerLabel.height)) {
+			Comm.openWebPage(Ui.loadResource(Rez.Strings.developerUrl), {}, {});
+		}
 		
 		return true;			
 	}
