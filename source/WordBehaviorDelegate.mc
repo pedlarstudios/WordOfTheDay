@@ -46,7 +46,7 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	
 	hidden function menuPress() {
 		logger.debug("Menu pressed");
-		Ui.pushView(new Rez.Menus.WordMenu(), new WordMenuDelegate(), Ui.SLIDE_UP);
+		Ui.pushView(new Rez.Menus.WordMenu(), new WordMenuDelegate(self.wordView), Ui.SLIDE_UP);
         return true;
 	}
 	
@@ -100,9 +100,11 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 
 //! Handles the menu
 class WordMenuDelegate extends Ui.MenuInputDelegate {
-
-	function initialize() {
+	hidden var wordView;
+	
+	function initialize(wordView) {
 		Ui.MenuInputDelegate.initialize();
+		self.wordView = wordView;
 	}
 	
 	function onMenuItem(item) {
@@ -112,6 +114,10 @@ class WordMenuDelegate extends Ui.MenuInputDelegate {
 			Ui.pushView(aboutView, aboutBehaviorDelegate, Ui.SLIDE_IMMEDIATE);
 		} else if (item == :help) {
 			Ui.pushView(new HelpView(), new BaseBehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
+		} else if (item == :openWord) {
+			if (Sys.getDeviceSettings().phoneConnected) {
+				self.wordView.openWordOfTheDayWebpage();
+			}
 		}
 		return true;
 	}

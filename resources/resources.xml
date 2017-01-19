@@ -4,6 +4,7 @@
     <bitmap id="providerLogo" filename="images/wordnik_badge_a2.png" />
     <string id="aboutMenuLabel">About</string>
     <string id="helpMenuLabel">Help</string>
+    <string id="openWordWebpageLabel">View Word on Phone</string>
     <string id="apiKey">INSERT KEY HERE</string>
     <string id="providerUrl">https://www.wordnik.com</string>
     <string id="developerUrl">https://www.pedlarstudios.com</string>

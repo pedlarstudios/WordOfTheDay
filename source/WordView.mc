@@ -147,7 +147,6 @@ class WordView extends Ui.View {
     	});
     	
     	wordLabel.setText(word.word);
-    	//noteLabel.setText(word.note);
     	    	
     	var definition = word.definitions[self.currentDefinitionIndex];
     	if (word.definitions.size() == 1) {

@@ -23,7 +23,7 @@ class TextWrapper {
 		var output = "";
 		var numberOfLines = Math.ceil(input.length().toDouble() / maxCharactersPerLine.toDouble()).toNumber();
 		numberOfLines = Utils.min(numberOfLines, self.maxNumberOfLines);
-		if (numberOfDefinitions > 1) {
+		if (numberOfDefinitions > 1 && numberOfLines == self.maxNumberOfLines) {
 			numberOfLines--;
 		}
 		logger.debug("Input (" + input.length() + "): " + input);
@@ -35,7 +35,7 @@ class TextWrapper {
 			var end = Utils.min(start + maxCharactersPerLine, input.length());
 			var section = input.substring(start, end); 
 			
-			if (i != numberOfLines - 1) {
+			if (i != numberOfLines - 1 || numberOfLines == 1) {
 				output += section;				
 				if (shouldAddHyphen(inputAsChars[end - 1])) {
 					output += "-";
