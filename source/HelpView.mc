@@ -1,11 +1,9 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Communications as Comm;
 using Toybox.System as Sys;
-using Log4MonkeyC as Log;
 
 // View that displays how-to information
 class HelpView extends Ui.View {
-	hidden var logger;
 	
 	function initialize() {
 		Ui.View.initialize();

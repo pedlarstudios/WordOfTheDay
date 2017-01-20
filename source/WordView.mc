@@ -4,14 +4,12 @@ using Toybox.System as Sys;
 using Toybox.Time as Time;
 using Toybox.Application as App;
 
-using Log4MonkeyC as Log;
 using Utils;
 
 // Main view and controller that loads and displays the word of the day
 class WordView extends Ui.View {
 	hidden const LAST_LOADED_DATE_KEY = "lastLoadedDate"; 
 	hidden const LAST_LOADED_WORD_KEY = "lastLoadedWord";
-	hidden var logger;
 	hidden var manager;
 	hidden var dataLoader;
 	hidden var currentWord;
@@ -22,7 +20,6 @@ class WordView extends Ui.View {
 
 	function initialize() {
 		Ui.View.initialize();
-		logger = Log.getLogger("WordOfTheDayView");
 		self.currentDefinitionIndex = 0;
 	}
 
@@ -39,12 +36,10 @@ class WordView extends Ui.View {
     	setIsLoading();
     	var lastLoadedDate = App.getApp().getProperty(LAST_LOADED_DATE_KEY);
     	var currentDate = Utils.formattedDateKey(Time.now(), "-");
-    	logger.debug("Last loaded: " + lastLoadedDate + " Current: " + currentDate);    		
     	if (!currentDate.equals(lastLoadedDate)) {
 			loadWordOfTheDay();
 		} else {
 			setFinishedLoading();
-			logger.debug("Displaying previously loaded word");
 			currentWord = new Word(App.getApp().getProperty(LAST_LOADED_WORD_KEY));
 			drawWord(currentWord);
 		}

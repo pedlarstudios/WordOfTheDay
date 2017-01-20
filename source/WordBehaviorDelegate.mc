@@ -1,32 +1,25 @@
 using Toybox.WatchUi as Ui;
-using Log4MonkeyC as Log;
 using Toybox.System as Sys;
 using Toybox.Communications as Comm;
 
 //! Handles user interactions for the widget
 class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	hidden var wordView;
-	hidden var logger;
 	
 	function initialize(wordView) {
 		Ui.BehaviorDelegate.initialize();
-		logger = Log.getLogger("WordBehaviorDelegate");
 		self.wordView = wordView;
 	}
 	
 	function onKey(evt) {
-		logger.debug("Key press: " + evt.getKey());
 		if (Ui.KEY_ENTER == evt.getKey()) {	
-			logger.debug("Enter pressed");
 			self.wordView.nextDefinition();			
 		} else if (Ui.KEY_ESC == evt.getKey()) {
-			logger.debug("Escape pressed");
 			// Returning false exits the widget
 			return false;
 		} else if (Ui.KEY_UP == evt.getKey() || Ui.KEY_MENU == evt.getKey()) {
 			return menuPress();
 		} else if (Ui.KEY_LAP == evt.getKey() || Ui.KEY_MODE == evt.getKey()) {
-			logger.debug("Lap/mode pressed");
 			openWordWebpage();
 		}
 
@@ -39,19 +32,16 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	}
 	
 	function onBack() {
-		logger.debug("On back");
 		// Returning false exits the widget
 		return false;
 	} 
 	
 	hidden function menuPress() {
-		logger.debug("Menu pressed");
 		Ui.pushView(new Rez.Menus.WordMenu(), new WordMenuDelegate(self.wordView), Ui.SLIDE_UP);
         return true;
 	}
 	
 	function onTap(evt) {
-		logger.debug("On tap");
 		self.wordView.nextDefinition();
 		return true;
 	}
@@ -59,7 +49,6 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	//! Handle touch screen swipe
 	function onSwipe(evt) {
 		var direction = evt.getDirection();
-		logger.debug("Swipe direction: " + direction);
 		if (direction == 3) {
 			// Left
 			onNextPage();
@@ -72,22 +61,18 @@ class WordBehaviorDelegate extends Ui.BehaviorDelegate {
 	}
 	
 	function onHold(evt) {
-		logger.info("On hold");
 		openWordWebpage();
 	}
 	
 	function onKeyReleased(evt) {
-		logger.info("On release " + evt.getKey());
 		return true;
 	}
 	
 	function onNextPage() {
-		logger.info("On next page");
 		return true;
 	}
 	
 	function onPreviousPage() {
-		logger.info("On previous page");
 		return true;		
 	}
 	

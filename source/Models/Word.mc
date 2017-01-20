@@ -1,4 +1,3 @@
-using Log4MonkeyC as Log;
 using Toybox.Lang as Lang;
 using Toybox.System as Sys;
 using Utils;
@@ -34,18 +33,19 @@ class Word {
 	function deserialize(serialized) {
 		id = serialized.get("id");
 		word = serialized.get("word");
-		note = serialized.get("note");
 		definitions = new [0];
 		examples = new [0];
+		
 		var serializedDefs = serialized.get("definitions");
 		for (var i = 0; i < serializedDefs.size(); i++) {
 			definitions.add(new WordDefinition(serializedDefs[i]));
 		}
-		
+		/*
+		note = serialized.get("note");
 		var serializedExamples = serialized.get("examples");
 		for (var i = 0; i < serializedExamples.size(); i++) {
 			examples.add(new WordExample(serializedExamples[i]));
-		}		
+		}*/		
 	}
 	
 	function toString() {
@@ -112,16 +112,8 @@ class WordExample {
 
 //! Builds a [Word] from provided JSON data
 class WordBuilderFromJson {
-	hidden var logger;
-
-	function initialize() {
-		logger = Log.getLogger("WordBuilderFromJson");
-	}
 
 	function build(jsonData) {
-		var word = new Word(jsonData);
-		
-		logger.debug("Built word from JSON: " + word.toString());
-		return word;	
+		return new Word(jsonData);
 	}
 }

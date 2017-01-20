@@ -1,4 +1,3 @@
-using Log4MonkeyC as Log;
 using Toybox.Math;
 using Utils;
 
@@ -7,10 +6,7 @@ class TextWrapper {
 	hidden var maxNumberOfLines = 5;
 	hidden var maxCharactersPerLine = 30;
 	
-	hidden var logger;
-	
 	function initialize(configuration) {
-		logger = Log.getLogger("TextWrapper");		
 		if (configuration == null || configuration.isEmpty()) {
 			// Defaults
 		} else {
@@ -26,9 +22,6 @@ class TextWrapper {
 		if (numberOfDefinitions > 1 && numberOfLines == self.maxNumberOfLines) {
 			numberOfLines--;
 		}
-		logger.debug("Input (" + input.length() + "): " + input);
-		logger.debug("Number of lines based on input: " + numberOfLines);
-		logger.debug("Number of lines possible based on device: " + self.maxNumberOfLines);
 		var inputAsChars = input.toCharArray();
 		for (var i = 0; i < numberOfLines; i++) {
 			var start = i * maxCharactersPerLine;
@@ -43,13 +36,11 @@ class TextWrapper {
 				output += "\n";
 			} else {
 				// Last line, truncate if necessary
-				logger.debug("Length " + section.length());
 				if (section.length() >= maxCharactersPerLine) {
 					section = section.substring(0, maxCharactersPerLine - 3) + "...";
 				}
 				output += section;
 			}
-			logger.debug(section);
 		}
 		return output;
 	}
