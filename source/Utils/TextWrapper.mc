@@ -44,7 +44,7 @@ class TextWrapper {
 			} else {
 				// Last line, truncate if necessary
 				logger.debug("Length " + section.length());
-				if (section.length() >= maxCharactersPerLine - 3) {
+				if (section.length() >= maxCharactersPerLine) {
 					section = section.substring(0, maxCharactersPerLine - 3) + "...";
 				}
 				output += section;
