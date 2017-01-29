@@ -149,7 +149,7 @@ class WordView extends Ui.View {
 	    	definitionLabel.setText(wrapper.apply(wordText, word.definitions.size()));
     		definitionNumberLabel.setText("");
     	} else if (word.definitions.size() > 0) {
-    		var wordText = (self.currentDefinitionIndex + 1) + ") " + definition.partOfSpeech + ": " + definition.text;
+    		var wordText = definition.partOfSpeech + ": " + definition.text;
 	    	definitionLabel.setText(wrapper.apply(wordText, word.definitions.size()));
     		definitionNumberLabel.setText((self.currentDefinitionIndex + 1) + "/" + word.definitions.size());
     	} else {

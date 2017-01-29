@@ -1,4 +1,5 @@
 <resources>
     <string id="maxCharactersPerLine">22</string>
     <string id="maxNumberOfLines">8</string>
+    <string id="openWordWebpageLabel">View on Phone</string>
 </resources>

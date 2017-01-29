@@ -36,7 +36,7 @@ class TextWrapper {
 				output += "\n";
 			} else {
 				// Last line, truncate if necessary
-				if (section.length() >= maxCharactersPerLine) {
+				if (section.length() > maxCharactersPerLine) {
 					section = section.substring(0, maxCharactersPerLine - 3) + "...";
 				}
 				output += section;
