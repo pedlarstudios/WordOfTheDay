@@ -65,7 +65,7 @@ class WordView extends Ui.View {
     		App.getApp().setProperty(LAST_LOADED_WORD_KEY, currentWord.serialize());
     		drawWord(currentWord);
     	} else {    		
-    		setLoadingError();
+    		setLoadingError(data);
     		Ui.requestUpdate();
     	}
     }
