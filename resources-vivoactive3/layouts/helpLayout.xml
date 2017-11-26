@@ -1,0 +1,5 @@
+<layout id="HelpLayout">
+    <label id="helpLabel" text="@Strings.helpMenuLabel" color="Gfx.COLOR_GREEN" x="center" y="5" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="nextDefinitionLabel" text="Press Start to cycle\nthrough definitions" color="Gfx.COLOR_WHITE" x="center" y="45" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <!-- <label id="launchWordLabel" text="Press and hold screen\nto open Word of the Day\nlink on your phone" color="Gfx.COLOR_WHITE" x="center" y="130" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />-->
+</layout>

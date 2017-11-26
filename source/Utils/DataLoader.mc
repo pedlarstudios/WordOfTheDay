@@ -7,7 +7,7 @@ using Utils;
 
 //! Loads data via JSON requests 
 class DataLoader {
-	hidden const WORD_OF_THE_DAY_API_URL = "http://api.wordnik.com/v4/words.json/wordOfTheDay";
+	hidden const WORD_OF_THE_DAY_API_URL = "https://api.wordnik.com/v4/words.json/wordOfTheDay";
 	hidden const WORD_OF_THE_DAY_URL = "https://www.wordnik.com/word-of-the-day/";
 		
 	hidden var callbackMethod;
@@ -22,7 +22,7 @@ class DataLoader {
 		var formattedDate = Utils.formattedDateKey(Time.now(), "-");
 		var apiKey = Ui.loadResource(Rez.Strings.apiKey);
 		var requestOptions = { "date" => formattedDate, "api_key" => apiKey };
-    	Comm.makeJsonRequest(WORD_OF_THE_DAY_API_URL, requestOptions, {}, method(:localResponseCallback));
+    	Comm.makeWebRequest(WORD_OF_THE_DAY_API_URL, requestOptions, {}, method(:localResponseCallback));
 	}
 	
 	function openWordOfTheDayWebpage() {
@@ -35,7 +35,7 @@ class DataLoader {
 		Comm.openWebPage(url, {}, {});
 	}
 	
-	//! Would be hidden but MonkeyC does not allow callback methods to be private
+	//! MonkeyC does not allow callback methods to be private
 	function localResponseCallback(responseCode, data) {
 		var response;
 		if (responseCode == 200) {

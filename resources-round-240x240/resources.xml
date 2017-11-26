@@ -1,4 +1,4 @@
 <resources>
-    <string id="maxCharactersPerLine">25</string>
+    <string id="maxCharactersPerLine">24</string>
     <string id="maxNumberOfLines">5</string>
 </resources>
