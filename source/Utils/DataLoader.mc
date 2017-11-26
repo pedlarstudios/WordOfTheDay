@@ -21,8 +21,14 @@ class DataLoader {
 		
 		var formattedDate = Utils.formattedDateKey(Time.now(), "-");
 		var apiKey = Ui.loadResource(Rez.Strings.apiKey);
-		var requestOptions = { "date" => formattedDate, "api_key" => apiKey };
-    	Comm.makeWebRequest(WORD_OF_THE_DAY_API_URL, requestOptions, {}, method(:localResponseCallback));
+		var params = { "date" => formattedDate, "api_key" => apiKey };
+		var options = {
+           :method => Communications.HTTP_REQUEST_METHOD_GET,
+           :headers => {
+                   "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON},                        
+           :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+       	};
+    	Comm.makeWebRequest(WORD_OF_THE_DAY_API_URL, params, options, method(:localResponseCallback));
 	}
 	
 	function openWordOfTheDayWebpage() {
