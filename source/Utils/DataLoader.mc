@@ -19,9 +19,12 @@ class DataLoader {
 			return;
 		}
 		
-		var formattedDate = Utils.formattedDateKey(Time.now(), "-");
 		var apiKey = Ui.loadResource(Rez.Strings.apiKey);
-		var params = { "date" => formattedDate, "api_key" => apiKey };
+		//var formattedDate = Utils.formattedDateKey(Time.today(), "-");		
+		//var params = { "date" => formattedDate, "api_key" => apiKey };
+		// Sometimes Wordnik does not return a proper response if passing in today's date, so omit it
+		// This should always return what the service considers to be the current word of the day
+		var params = { "api_key" => apiKey };
 		var options = {
            :method => Communications.HTTP_REQUEST_METHOD_GET,
            :headers => {

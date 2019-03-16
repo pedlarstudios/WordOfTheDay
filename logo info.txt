@@ -1,0 +1,8 @@
+Font size 95
+Font = 300 Trojans
+
+Green - #227420
+Shadow - #cccde3
+Blue - #67addb
+
+Created on flamingtext.com

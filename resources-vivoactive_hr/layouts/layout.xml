@@ -1,6 +1,6 @@
 <layout id="MainLayout">
-    <label id="wordLabel" text="@Strings.emptyString" color="Gfx.COLOR_GREEN" x="5" y="5" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_LEFT" />
-    <label id="currentDefinitionLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="5" y="30" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_LEFT" />
+    <label id="wordLabel" text="@Strings.emptyString" color="Gfx.COLOR_GREEN" x="center" y="5" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="currentDefinitionLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="center" y="30" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />
     <bitmap id="loadingImage" x="center" y="50" filename="../images/logo_32x32.png" />
     <label id="loadingLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="center" y="center" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />    
     <label id="noteLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="25" y="100" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />

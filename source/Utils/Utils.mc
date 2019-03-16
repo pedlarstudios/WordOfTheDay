@@ -1,9 +1,69 @@
 using Toybox.System as Sys;
 using Toybox.Time as Time;
 using Toybox.Time.Gregorian as Cal;
+using Toybox.WatchUi as Ui;
+using Toybox.Math;
 
 //! Assorted static utility methods
 module Utils {
+
+	var line1MaxChars = Ui.loadResource(Rez.Strings.line1MaxChars).toNumber();
+	var line2MaxChars = Ui.loadResource(Rez.Strings.line2MaxChars).toNumber();
+	var line3MaxChars = Ui.loadResource(Rez.Strings.line3MaxChars).toNumber();
+	var line4MaxChars = Ui.loadResource(Rez.Strings.line4MaxChars).toNumber();
+	var line5MaxChars = Ui.loadResource(Rez.Strings.line5MaxChars).toNumber();
+	var line6MaxChars = Ui.loadResource(Rez.Strings.line6MaxChars).toNumber();
+	var maxNumberOfLines = Ui.loadResource(Rez.Strings.maxNumberOfLines).toNumber();
+	
+	function applyWrapping(input, numberOfDefinitions) {
+		var output = "";
+		var numberOfLines = Math.ceil(input.length().toDouble() / line3MaxChars.toDouble()).toNumber();
+		numberOfLines = Utils.min(numberOfLines, maxNumberOfLines);
+		var inputAsChars = input.toCharArray();
+
+		var currentLineIndex = 0;
+		var currentCharacterIndex = 0;
+		while (currentCharacterIndex < input.length()) {
+			var maxCharactersPerLine = line1MaxChars;	// assuming this is the smallest number
+			if (currentLineIndex == 0) {
+				maxCharactersPerLine = line1MaxChars;
+			}
+			else if (currentLineIndex == 1) {
+				maxCharactersPerLine = line2MaxChars;
+			}
+			else if (currentLineIndex == 2) {
+				maxCharactersPerLine = line3MaxChars;
+			}
+			else if (currentLineIndex == 3) {
+				maxCharactersPerLine = line4MaxChars;
+			}
+			else if (currentLineIndex == 4) {
+				maxCharactersPerLine = line5MaxChars;
+			} else if (currentLineIndex == 5) {
+				maxCharactersPerLine = line6MaxChars;
+			}		
+								
+			var start = currentCharacterIndex;
+			var end = Utils.min(start + maxCharactersPerLine, input.length());
+			var section = input.substring(start, end);
+			// TODO trim section, and don't count leading/trailing whitespace in character count
+			currentCharacterIndex = end;
+			if (currentLineIndex != numberOfLines - 1) {
+				output += section;								
+				output += "\n";
+			} else {
+				// Last line, shows ellipses if we cannot show all text
+				var remaining = (input.length() - output.length()) - section.length();				
+				if (remaining > 0) {				
+					section = section.substring(0, section.length() - 4) + "...";
+				}
+				output += section;
+				break;
+			}
+			currentLineIndex++;						
+		}
+		return output;
+	}
 
 	function min(a, b) {
 		if (a < b) {
@@ -17,6 +77,24 @@ module Utils {
 			return a;
 		}
 		return b;
+	}
+	
+	function trimStart(str) {
+		if (str == null) { 
+			return str;
+		}
+		var newString = "";
+		var chars = str.toCharArray();
+		var foundNonSpace = false;
+		for (var i = 0; i < chars.length; i++) {
+			if (chars[i] != ' ') {
+				newString += chars[i];
+				foundNonSpace = true;
+			} else if (foundNonSpace) {
+				newString += chars[i];
+			}			
+		}
+		return newString;
 	}
 	
 	function formattedDateKey(date, separator) {

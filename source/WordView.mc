@@ -133,24 +133,18 @@ class WordView extends Ui.View {
     	var wordLabel = findDrawableById("wordLabel");
     	var noteLabel = findDrawableById("noteLabel");
     	var definitionLabel = findDrawableById("currentDefinitionLabel");
-    	var definitionNumberLabel = findDrawableById("definitionNumberLabel");
-    	var maxCharactersPerLine = Ui.loadResource(Rez.Strings.maxCharactersPerLine).toNumber();
-    	var maxNumberOfLines = Ui.loadResource(Rez.Strings.maxNumberOfLines).toNumber();
-    	var wrapper = new TextWrapper({
-    		:maxCharactersPerLine => maxCharactersPerLine,
-    		:maxNumberOfLines => maxNumberOfLines
-    	});
+    	var definitionNumberLabel = findDrawableById("definitionNumberLabel");    	    
     	
     	wordLabel.setText(word.word);
     	    	
-    	var definition = word.definitions[self.currentDefinitionIndex];
+    	var definition = word.definitions[self.currentDefinitionIndex];  
     	if (word.definitions.size() == 1) {
     		var wordText = definition.partOfSpeech + ": " + definition.text;
-	    	definitionLabel.setText(wrapper.apply(wordText, word.definitions.size()));
+	    	definitionLabel.setText(Utils.applyWrapping(wordText, word.definitions.size()));
     		definitionNumberLabel.setText("");
     	} else if (word.definitions.size() > 0) {
     		var wordText = definition.partOfSpeech + ": " + definition.text;
-	    	definitionLabel.setText(wrapper.apply(wordText, word.definitions.size()));
+	    	definitionLabel.setText(Utils.applyWrapping(wordText, word.definitions.size()));
     		definitionNumberLabel.setText((self.currentDefinitionIndex + 1) + "/" + word.definitions.size());
     	} else {
     		definitionLabel.setText("");
