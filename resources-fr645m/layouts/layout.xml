@@ -4,5 +4,5 @@
     <bitmap id="loadingImage" x="center" y="60" filename="../images/logo_32x32.png" />
     <label id="loadingLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="center" y="center" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />    
     <label id="noteLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="25" y="100" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-    <label id="definitionNumberLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="center" y="195" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="definitionNumberLabel" text="@Strings.emptyString" color="Gfx.COLOR_WHITE" x="center" y="200" font="Gfx.FONT_TINY" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 </layout>
