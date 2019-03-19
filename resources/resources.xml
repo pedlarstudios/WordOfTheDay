@@ -9,7 +9,7 @@
     <string id="providerUrl">https://www.wordnik.com</string>
     <string id="developerUrl">https://www.pedlarstudios.com</string>
     <string id="developerInfo">Developed by\nPedlar Studios\npedlarstudios.com</string>
-    <string id="version">Version 1.10</string>
+    <string id="version">Version 1.5.0</string>
     <string id="loadingText">Loading\nWord of the Day</string>
     <string id="emptyString"></string>
     
