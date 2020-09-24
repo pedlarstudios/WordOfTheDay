@@ -14,8 +14,8 @@ module Utils {
 	var line5MaxChars = Ui.loadResource(Rez.Strings.line5MaxChars).toNumber();
 	var line6MaxChars = Ui.loadResource(Rez.Strings.line6MaxChars).toNumber();
 	var maxNumberOfLines = Ui.loadResource(Rez.Strings.maxNumberOfLines).toNumber();
-	
-	function applyWrapping(input, numberOfDefinitions) {
+
+	function applyWrapping(input) {
 		var output = "";
 		var numberOfLines = Math.ceil(input.length().toDouble() / line3MaxChars.toDouble()).toNumber();
 		numberOfLines = Utils.min(numberOfLines, maxNumberOfLines);
@@ -41,26 +41,26 @@ module Utils {
 				maxCharactersPerLine = line5MaxChars;
 			} else if (currentLineIndex == 5) {
 				maxCharactersPerLine = line6MaxChars;
-			}		
-								
+			}
+
 			var start = currentCharacterIndex;
 			var end = Utils.min(start + maxCharactersPerLine, input.length());
 			var section = input.substring(start, end);
 			// TODO trim section, and don't count leading/trailing whitespace in character count
 			currentCharacterIndex = end;
 			if (currentLineIndex != numberOfLines - 1) {
-				output += section;								
+				output += section;
 				output += "\n";
 			} else {
 				// Last line, shows ellipses if we cannot show all text
-				var remaining = (input.length() - output.length()) - section.length();				
-				if (remaining > 0) {				
+				var remaining = (input.length() - output.length()) - section.length();
+				if (remaining > 0) {
 					section = section.substring(0, section.length() - 4) + "...";
 				}
 				output += section;
 				break;
 			}
-			currentLineIndex++;						
+			currentLineIndex++;
 		}
 		return output;
 	}
@@ -71,16 +71,16 @@ module Utils {
 		}
 		return b;
 	}
-	
+
 	function max(a, b) {
 		if (a > b) {
 			return a;
 		}
 		return b;
 	}
-	
+
 	function trimStart(str) {
-		if (str == null) { 
+		if (str == null) {
 			return str;
 		}
 		var newString = "";
@@ -92,24 +92,24 @@ module Utils {
 				foundNonSpace = true;
 			} else if (foundNonSpace) {
 				newString += chars[i];
-			}			
+			}
 		}
 		return newString;
 	}
-	
+
 	function formattedDateKey(date, separator) {
 		var timeInfo = Cal.info(date, Time.FORMAT_SHORT);
 		return timeInfo.year.format("%04d") + separator + timeInfo.month.format("%02d") + separator + timeInfo.day.format("%02d");
 	}
-	
+
 	function serializeArray(arrayOfSerializables) {
 		var serializedArray = new [0];
 		for (var i = 0; i < arrayOfSerializables.size(); i++) {
 			var item = arrayOfSerializables[i];
 			serializedArray.add(item.serialize());
-		}	
-		
+		}
+
 		return serializedArray;
 	}
-	
+
 }
