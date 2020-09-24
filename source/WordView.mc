@@ -8,7 +8,7 @@ using Utils;
 
 // Main view and controller that loads and displays the word of the day
 class WordView extends Ui.View {
-	hidden const LAST_LOADED_DATE_KEY = "lastLoadedDate"; 
+	hidden const LAST_LOADED_DATE_KEY = "lastLoadedDate";
 	hidden const LAST_LOADED_WORD_KEY = "lastLoadedWord";
 	hidden var manager;
 	hidden var dataLoader;
@@ -56,24 +56,24 @@ class WordView extends Ui.View {
     function onHide() {
     	// Nothing yet
     }
-    
+
     function dataResponseCallback(data) {
-    	setFinishedLoading();    	
+    	setFinishedLoading();
 		if (data.success) {
     		currentWord = new WordBuilderFromJson().build(data.data);
     		App.getApp().setProperty(LAST_LOADED_DATE_KEY, Utils.formattedDateKey(Time.now(), "-"));
     		App.getApp().setProperty(LAST_LOADED_WORD_KEY, currentWord.serialize());
     		drawWord(currentWord);
-    	} else {    		
+    	} else {
     		setLoadingError(data);
     		Ui.requestUpdate();
     	}
     }
-    
+
     function openWordOfTheDayWebpage() {
     	loader().openWordOfTheDayWebpage();
     }
-    
+
     function loadWordOfTheDay() {
 		if (self.currentWord != null) {
 			return;
@@ -81,7 +81,7 @@ class WordView extends Ui.View {
 		setIsLoading();
 		loader().loadWordOfTheDay(method(:dataResponseCallback));
 	}
-	
+
 	function nextDefinition() {
 		if (self.currentDefinitionIndex == -1 || self.currentWord == null || self.currentWord.definitions.size() <= 1) {
     		return self.currentDefinitionIndex;
@@ -91,11 +91,11 @@ class WordView extends Ui.View {
     	} else {
     		self.currentDefinitionIndex++;
     	}
-    	
+
     	drawWord(self.currentWord);
     	return self.currentDefinitionIndex;
 	}
-	
+
 	function previousDefinition() {
 		if (self.currentDefinitionIndex == -1 || self.currentWord == null || self.currentWord.definitions.size() <= 1) {
     		return self.currentDefinitionIndex;
@@ -105,27 +105,27 @@ class WordView extends Ui.View {
     	} else {
     		self.currentDefinitionIndex--;
     	}
-    	
+
 		drawWord(self.currentWord);
     	return self.currentDefinitionIndex;
 	}
-	
+
 	hidden function setIsLoading() {
 		loadingLabelDrawable.setText(Rez.Strings.loadingText);
 		loadingImageDrawable.setLocation(loadingImageOriginalLocation[0], loadingImageOriginalLocation[1]);
 	}
-	
+
 	hidden function setFinishedLoading() {
 		loadingLabelDrawable.setText("");
 		loadingImageDrawable.setLocation(-999, -999);
 	}
-	
+
 	hidden function setLoadingError(responseData) {
 		loadingLabelDrawable.setText(responseData.data);
-		loadingImageDrawable.setLocation(loadingImageOriginalLocation[0], loadingImageOriginalLocation[1]);    	
+		loadingImageDrawable.setLocation(loadingImageOriginalLocation[0], loadingImageOriginalLocation[1]);
 	}
-	
-	hidden function loader() {		
+
+	hidden function loader() {
     	return new DataLoader();
 	}
 
@@ -133,24 +133,30 @@ class WordView extends Ui.View {
     	var wordLabel = findDrawableById("wordLabel");
     	var noteLabel = findDrawableById("noteLabel");
     	var definitionLabel = findDrawableById("currentDefinitionLabel");
-    	var definitionNumberLabel = findDrawableById("definitionNumberLabel");    	    
-    	
-    	wordLabel.setText(word.word);
-    	    	
-    	var definition = word.definitions[self.currentDefinitionIndex];  
-    	if (word.definitions.size() == 1) {
-    		var wordText = definition.partOfSpeech + ": " + definition.text;
-	    	definitionLabel.setText(Utils.applyWrapping(wordText, word.definitions.size()));
-    		definitionNumberLabel.setText("");
-    	} else if (word.definitions.size() > 0) {
-    		var wordText = definition.partOfSpeech + ": " + definition.text;
-	    	definitionLabel.setText(Utils.applyWrapping(wordText, word.definitions.size()));
-    		definitionNumberLabel.setText((self.currentDefinitionIndex + 1) + "/" + word.definitions.size());
-    	} else {
-    		definitionLabel.setText("");
-    		definitionNumberLabel.setText("");
-    	}
-    	
+    	var definitionNumberLabel = findDrawableById("definitionNumberLabel");
+
+		if (word != null) {
+			if (word.word != null) {
+	    		wordLabel.setText(word.word);
+	    	}
+
+	    	if (word.definitions != null && word.definitions.size() > 0)  {
+	    		var definition = word.definitions[self.currentDefinitionIndex];
+	    	    var wordText = definition.partOfSpeech + ": " + definition.text;
+	    	   	definitionLabel.setText(Utils.applyWrapping(wordText));
+	    		if (word.definitions.size() > 1) {
+	    			definitionNumberLabel.setText((self.currentDefinitionIndex + 1) + "/" + word.definitions.size());
+	    		}
+	    	} else {
+	    		definitionLabel.setText("");
+	    		definitionNumberLabel.setText("");
+	    	}
+		} else {
+			wordLabel.setText(Rez.Strings.wordLoadFailure);
+			definitionLabel.setText("");
+	    	definitionNumberLabel.setText("");
+		}
+
     	Ui.requestUpdate();
-    }    
+    }
 }

@@ -10,7 +10,7 @@ class Word {
 	var definitions;
 	var examples;
 
-	function initialize(serialization) {		
+	function initialize(serialization) {
 		if (serialization != null) {
 			deserialize(serialization);
 		} else {
@@ -18,7 +18,7 @@ class Word {
 			examples = new [0];
 		}
 	}
-	
+
 	function serialize() {
 		var serialized = {
 			"id" => id,
@@ -29,25 +29,28 @@ class Word {
 		};
 		return serialized;
 	}
-	
+
 	function deserialize(serialized) {
 		id = serialized.get("id");
 		word = serialized.get("word");
 		definitions = new [0];
 		examples = new [0];
-		
+
 		var serializedDefs = serialized.get("definitions");
-		for (var i = 0; i < serializedDefs.size(); i++) {
-			definitions.add(new WordDefinition(serializedDefs[i]));
+		if (serializedDefs != null) {
+			for (var i = 0; i < serializedDefs.size(); i++) {
+				definitions.add(new WordDefinition(serializedDefs[i]));
+			}
 		}
+		// Not displayed currently
 		/*
 		note = serialized.get("note");
 		var serializedExamples = serialized.get("examples");
 		for (var i = 0; i < serializedExamples.size(); i++) {
 			examples.add(new WordExample(serializedExamples[i]));
-		}*/		
+		}*/
 	}
-	
+
 	function toString() {
 		var toString = "id: " + id + ", word: " + word + ", note: " + note;
 		return toString;
@@ -59,13 +62,13 @@ class WordDefinition {
 	var text;
 	var source;
 	var partOfSpeech;
-	
+
 	function initialize(serialization) {
 		if (serialization != null) {
 			deserialize(serialization);
 		}
 	}
-	
+
 	function serialize() {
 		return {
 			"text" => text,
@@ -73,13 +76,13 @@ class WordDefinition {
 			"partOfSpeech" => partOfSpeech
 		};
 	}
-	
+
 	function deserialize(serialized) {
 		text = serialized.get("text");
 		source = serialized.get("source");
 		partOfSpeech = serialized.get("partOfSpeech");
 	}
-	
+
 	function toString() {
 		var toString = "text: " + text + ", source: " + source + ", partOfSpeech: " + partOfSpeech;
 		return toString;
@@ -90,23 +93,23 @@ class WordDefinition {
 class WordExample {
 	var text;
 	var title;
-	
+
 	function initialize(serialization) {
 		if (serialization != null) {
 			deserialize(serialization);
 		}
 	}
-	
+
 	function serialize() {
 		return {
 			"text" => text,
 			"title" => title
 		};
 	}
-	
+
 	function deserialize(serialized) {
 		text = serialized.get("text");
-		title = serialized.get("title");		
+		title = serialized.get("title");
 	}
 }
 
