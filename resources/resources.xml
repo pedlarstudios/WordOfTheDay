@@ -1,6 +1,6 @@
 <resources>
     <string id="AppName">Word Of The Day</string>
-    <bitmap id="LauncherIcon" filename="images/logo_32x32.png" />
+    <bitmap id="LauncherIcon" filename="images/logo_30x28.png" />
     <bitmap id="providerLogo" filename="images/wordnik_badge_a2.png" />
     <string id="aboutMenuLabel">About</string>
     <string id="helpMenuLabel">Help</string>

@@ -17,27 +17,22 @@ module Utils {
 
 	function applyWrapping(input) {
 		var output = "";
-		var numberOfLines = Math.ceil(input.length().toDouble() / line3MaxChars.toDouble()).toNumber();
+		var numberOfLines = numberOfLines(input);
 		numberOfLines = Utils.min(numberOfLines, maxNumberOfLines);
 		var inputAsChars = input.toCharArray();
-
 		var currentLineIndex = 0;
 		var currentCharacterIndex = 0;
 		while (currentCharacterIndex < input.length()) {
 			var maxCharactersPerLine = line1MaxChars;	// assuming this is the smallest number
 			if (currentLineIndex == 0) {
 				maxCharactersPerLine = line1MaxChars;
-			}
-			else if (currentLineIndex == 1) {
+			} else if (currentLineIndex == 1) {
 				maxCharactersPerLine = line2MaxChars;
-			}
-			else if (currentLineIndex == 2) {
+			} else if (currentLineIndex == 2) {
 				maxCharactersPerLine = line3MaxChars;
-			}
-			else if (currentLineIndex == 3) {
+			} else if (currentLineIndex == 3) {
 				maxCharactersPerLine = line4MaxChars;
-			}
-			else if (currentLineIndex == 4) {
+			} else if (currentLineIndex == 4) {
 				maxCharactersPerLine = line5MaxChars;
 			} else if (currentLineIndex == 5) {
 				maxCharactersPerLine = line6MaxChars;
@@ -63,6 +58,39 @@ module Utils {
 			currentLineIndex++;
 		}
 		return output;
+	}
+
+	function numberOfLines(input) {
+		var inputLength = input.length().toNumber();
+		var numberOfLines = 0;
+		inputLength -= line1MaxChars;
+		numberOfLines++;
+		if (inputLength <= 0) {
+			return numberOfLines;
+		}
+		inputLength -= line2MaxChars;
+		numberOfLines++;
+		if (inputLength <= 0) {
+			return numberOfLines;
+		}
+		inputLength -= line3MaxChars;
+		numberOfLines++;
+		if (inputLength <= 0) {
+			return numberOfLines;
+		}
+		inputLength -= line4MaxChars;
+		numberOfLines++;
+		if (inputLength <= 0) {
+			return numberOfLines;
+		}
+		inputLength -= line5MaxChars;
+		numberOfLines++;
+		if (inputLength <= 0) {
+			return numberOfLines;
+		}
+		inputLength -= line6MaxChars;
+		numberOfLines++;
+		return numberOfLines;
 	}
 
 	function min(a, b) {
