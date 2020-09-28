@@ -5,7 +5,7 @@
     <string id="aboutMenuLabel">About</string>
     <string id="helpMenuLabel">Help</string>
     <string id="openWordWebpageLabel">View Word on Phone</string>
-    <string id="apiKey">c7c184241eb96b023400e0f2c040112ac628aaa6182098986</string>
+    <string id="apiKey"></string>
     <string id="providerUrl">https://www.wordnik.com</string>
     <string id="developerUrl">https://www.pedlarstudios.com</string>
     <string id="developerInfo">Developed by\nPedlar Studios\npedlarstudios.com</string>
